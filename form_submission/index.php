@@ -15,6 +15,18 @@
 	$err_bio="";
 	
 	$hasError=false;
+	
+	$professions = array("Teaching","Service","Business","Entreprenuer");
+	
+	function hobbyExist($hobby){
+		global $hobbies;
+		foreach($hobbies as $h){
+			if($h == $hobby){
+				return true;
+			}
+		}
+		return false;
+	}
 
 	if($_SERVER["REQUEST_METHOD"] == "POST"){
 		
@@ -43,6 +55,13 @@
 		}
 		else{
 			$gender = $_POST["gender"];
+		}
+		if(!isset($_POST["profession"])){
+			$err_prof = "Profession Required";
+			$hasError = true;
+		}
+		else{
+			$prof = $_POST["profession"];
 		}
 		if(!isset($_POST["hobbies"])){
 			$err_hobbies="Hobbies Required";
@@ -101,27 +120,33 @@
 
 					<tr>
 						<td>Gender: </td>
-						<td><input type="radio" value="Male" name="gender"> Male <input name="gender" value="Female" type="radio"> Female</td>
+						<td><input type="radio" value="Male" <?php if($gender == "Male") echo "checked";?> name="gender"> Male <input <?php if($gender == "Female") echo "checked";?> name="gender"  value="Female" type="radio"> Female</td>
 						<td><span><?php echo $err_gender;?></span></td>
 					</tr>
 					<tr>
 						<td>Profession:  </td>
 						<td>
 							<select name="profession">
-								<option>Teaching</option>
-								<option>Service</option>
-								<option>Business</option>
-								<option>Entreprenuer</option>
+								<option selected disabled>--Select--</option>
+								<?php
+									foreach($professions as $pf){
+										if($prof == $pf)
+											echo "<option selected>$pf</option>";
+										else
+											echo "<option>$pf</option>";
+									}
+								?>
 							</select> 
 						</td>
+						<td><span><?php echo $err_prof;?></span></td>
 					</tr>
 					<tr>
 						<td>Hobbies:  </td>
 						<td>
-							<input type="checkbox" value="Movies" name="hobbies[]"> Movies
-							<input type="checkbox" value="Music" name="hobbies[]"> Music<br>
-							<input type="checkbox" value="Sports" name="hobbies[]"> Sports
-							<input type="checkbox" value="Games" name="hobbies[]"> Games
+							<input type="checkbox" value="Movies" <?php if(hobbyExist("Movies")) echo "checked";?>  name="hobbies[]"> Movies
+							<input type="checkbox" value="Music" <?php if(hobbyExist("Music")) echo "checked";?> name="hobbies[]"> Music<br>
+							<input type="checkbox" value="Sports" <?php if(hobbyExist("Sports")) echo "checked";?> name="hobbies[]"> Sports
+							<input type="checkbox" value="Games" <?php if(hobbyExist("Games")) echo "checked";?> name="hobbies[]"> Games
 						</td>
 						<td><span><?php echo $err_hobbies;?></span></td>
 					</tr>
