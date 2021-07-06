@@ -39,7 +39,7 @@
 			$hasError = true;
 		}
 		else{
-			$name=$_POST["name"];
+			$name=htmlspecialchars($_POST["name"]);
 		}
 		if(empty($_POST["username"])){
 			$err_uname="Username Required";
