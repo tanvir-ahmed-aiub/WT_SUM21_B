@@ -56,6 +56,15 @@
 			$err_db = "Username password invalid";
 		}
 	}
+
+	function validateEmail($email){
+		$pos_at = strpos($email,"@"); 
+		$pos_dot = strpos($email,".",$pos_at); 
+		if($pos_dot > $pos_at){
+			return true;
+		}
+		return false;
+	}
 	
 	function insertUser($name,$uname,$email,$pass){
 		$query  = "insert into users values (NULL,'$name','$uname','$email','$pass')";
@@ -69,6 +78,14 @@
 		}
 		return false;
 		
+	}
+	function checkUsername($uname){
+		$query = "select name from users where username='$uname'";
+		$rs = get($query);
+		if(count($rs) > 0){
+			return true;
+		}
+		else return false;
 	}
 	
 ?>

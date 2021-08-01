@@ -4,11 +4,16 @@
 ?>
 <!--All Products starts -->
 
+<script src="js/products.js"></script>
 <div class="center">
 	<h3 class="text">All Products</h3>
+	<input type="text" class="form-control" onkeyup="search(this)" placeholder="Search..." >
+	<div id="suggestions">
+	</div>
 	<table class="table table-striped">
 		<thead>
 			<th>Sl#</th>
+			<th></th>
 			<th> Name</th>
 			<th>Category </th>
 			<th> Price</th>
@@ -18,6 +23,7 @@
 			
 		</thead>
 		<tbody>
+		
 			<?php
 				$i=1;
 				foreach($products as $p){

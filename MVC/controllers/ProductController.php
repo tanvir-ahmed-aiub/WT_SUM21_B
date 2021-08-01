@@ -38,4 +38,9 @@
 		$rs = get($query);
 		return $rs[0];
 	}
+	function search($key){
+		$query = "select id,name from products where name like '%$key%'";
+		$rs = get($query);
+		return $rs;
+	}
 ?>

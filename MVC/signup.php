@@ -3,7 +3,7 @@
 <?php
 	include 'controllers/UserController.php';
 ?>
-
+<script src="js/signup.js"></script>
 <!--sign up starts -->
 <div class="center-login">
 	<h1 class="text text-center">Sign Up</h1>
@@ -16,8 +16,8 @@
 		</div>
 		<div class="form-group">
 			<h4 class="text">Username</h4> 
-			<input type="text" name="uname" value="<?php echo $uname;?>" class="form-control">
-			<span class="text-danger"><?php echo $err_uname;?></span>
+			<input type="text" onfocusout="checkUsername(this)" name="uname" value="<?php echo $uname;?>" class="form-control">
+			<span id="err_uname" class="text-danger"><?php echo $err_uname;?></span>
 		</div>
 		<div class="form-group">
 			<h4 class="text">Email</h4> 
