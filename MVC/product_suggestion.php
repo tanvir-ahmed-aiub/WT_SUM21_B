@@ -5,7 +5,7 @@
 	
 	if(count($products) > 0){
 		foreach($products as $p){
-			echo "<p>".$p["name"]."</p>";
+			echo "<a href='editproduct.php?id=".$p["id"]."'>".$p["name"]."</a><br>";
 		}
 	}
 ?>

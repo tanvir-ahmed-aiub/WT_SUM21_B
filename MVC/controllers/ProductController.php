@@ -39,7 +39,7 @@
 		return $rs[0];
 	}
 	function search($key){
-		$query = "select id,name from products where name like '%$key%'";
+		$query = "select p.id,p.name from products p left join categories c on c.id = p.c_id where p.name like '%$key%' or c.name like '%$key%'";
 		$rs = get($query);
 		return $rs;
 	}

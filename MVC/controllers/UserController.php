@@ -48,10 +48,15 @@
 		}
 		if(!$hasError){
 			
-			if(authenticateUser($_POST["uname"],$_POST["pass"])){
+			if($user = authenticateUser($_POST["uname"],$_POST["pass"])){
 				session_start();
 				$_SESSION["loggeduser"] = $_POST["uname"];
-				header("Location: dashboard.php");
+				if($user["status"] == "active" && $user["type"]=="admin")
+					header("Location: dashboard.php");
+				else if($user["status"] == "active" && $user["type"]=="user"){
+					header("Location: user_dashboard.php");
+				}
+					
 			}
 			$err_db = "Username password invalid";
 		}
@@ -74,7 +79,7 @@
 		$query ="select * from users where username='$uname' and password='$pass'";
 		$rs = get($query);
 		if(count($rs)>0){
-			return true;
+			return $rs[0];
 		}
 		return false;
 		
